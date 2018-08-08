@@ -1,19 +1,20 @@
 from tkinter import *
 import time
 import random
+from PIL import ImageTk, Image
 
 tk = Tk()
 tk.title('Game')
-tk.resizable(0, 0)
+tk.resizable(1, 1)
 tk.wm_attributes('-topmost', 1)
 canvas = Canvas(tk, width=500, height=400, highlightthickness=0)
 canvas.pack()
-my_image = PhotoImage(file='wow.gif')
-canvas.create_image(0, 0, anchor=NW, image=my_image)
+#my_image = PhotoImage(file='wow.gif')
+#canvas.create_image(0, 0, anchor=NW, image=my_image)
 tk.update()
 
 
-class Ball:
+'''class Ball:
     def __init__(self, canvas, paddle, score, color):
         self.canvas = canvas
         self.paddle = paddle
@@ -49,13 +50,16 @@ class Ball:
         if pos[0] <= 0:
             self.x = 2
         if pos[2] >= self.canvas_width:
-            self.x = -2
+            self.x = -2'''
 
 
 class Paddle:
     def __init__(self, canvas, color):
         self.canvas = canvas
-        self.id = canvas.create_rectangle(0, 0, 100, 10, fill=color)
+        pilImage = Image.open("ha-ha2.jpg")
+        image = ImageTk.PhotoImage(pilImage)
+        self.id = canvas.create_image(20, 20, image=image)
+        #self.id = canvas.create_rectangle(0, 0, 100, 10, fill=color)
         start_1 = [40, 60, 90, 120, 150, 180, 200]
         random.shuffle(start_1)
         self.starting_point_x = start_1[0]
@@ -79,13 +83,15 @@ class Paddle:
     def draw(self):
         self.canvas.move(self.id, self.x, 0)
         pos = self.canvas.coords(self.id)
+        print(pos)
+
         if pos[0] <= 0:
             self.x = 0
-        elif pos[2] >= self.canvas_width:
+        elif pos[0]+20 >= self.canvas_width:
             self.x = 0
 
 
-class Score:
+'''class Score:
     def __init__(self, canvas, color):
         self.score = 0
         self.canvas = canvas
@@ -96,14 +102,14 @@ class Score:
         self.canvas.itemconfig(self.id, text=self.score)
 
 
-score = Score(canvas, 'green')
-paddle = Paddle(canvas, 'White')
-ball = Ball(canvas, paddle, score, 'red')
+score = Score(canvas, 'green')'''
+paddle = Paddle(canvas, 'Red')
+#ball = Ball(canvas, paddle, score, 'red')
 
 while 1:
-    if ball.hit_bottom == False and paddle.started == True:
-        ball.draw()
-        paddle.draw()
+    '''if ball.hit_bottom == False and paddle.started == True:
+        ball.draw()'''
+    paddle.draw()
     tk.update_idletasks()
     tk.update()
     time.sleep(0.01)

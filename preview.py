@@ -16,11 +16,15 @@ canvas = Canvas(tmp, width=500, height=400, highlightthickness=0)
 canvas.pack()
 #canvas.create_image(0, 0, anchor=NW, image=my_image)
 tmp.update()'''
-pilImage = Image.open("ha-ha2.jpg")
+
 main_window = Tk()
 frame = Frame(main_window, background="black")
 frame.pack(fill=BOTH, expand=1)
+
+pilImage = Image.open("ha-ha2.jpg")
 image = ImageTk.PhotoImage(pilImage)
+
+
 main_window.resizable(0, 0)
 w = 300
 h = 190
